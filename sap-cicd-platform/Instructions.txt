@@ -1,0 +1,175 @@
+# Install Node.js 18+ (LTS recommended)
+# Download from: https://nodejs.org/
+# Verify installation:
+node --version  # Should be 18.0.0 or higher
+npm --version   # Should be 9.0.0 or higher
+
+# Download from: https://git-scm.com/
+# Verify installation:
+git --version
+
+
+Visual Studio Code with these extensions:
+TypeScript and JavaScript Language Features
+Tailwind CSS IntelliSense
+ES7+ React/Redux/React-Native snippets
+Prettier - Code formatter
+Auto Rename Tag
+
+
+# Create a new directory for your project
+mkdir sap-cicd-platform
+cd sap-cicd-platform
+
+# Initialize with Vite + React + TypeScript template
+npm create vite@latest . -- --template react-ts
+
+# Answer prompts:
+# ✔ Current directory is not empty. Remove existing files and continue? … yes
+# ✔ Select a framework: › React
+# ✔ Select a variant: › TypeScript
+
+Step 3: Install Dependencies
+# Install all required dependencies
+npm install
+
+npm install @hookform/resolvers @radix-ui/react-accordion @radix-ui/react-alert-dialog @radix-ui/react-aspect-ratio @radix-ui/react-avatar @radix-ui/react-checkbox @radix-ui/react-collapsible @radix-ui/react-context-menu @radix-ui/react-dialog @radix-ui/react-dropdown-menu @radix-ui/react-hover-card @radix-ui/react-label @radix-ui/react-menubar @radix-ui/react-navigation-menu @radix-ui/react-popover @radix-ui/react-progress @radix-ui/react-radio-group @radix-ui/react-scroll-area @radix-ui/react-select @radix-ui/react-separator @radix-ui/react-slider @radix-ui/react-slot @radix-ui/react-switch @radix-ui/react-tabs @radix-ui/react-toast @radix-ui/react-toggle @radix-ui/react-toggle-group @radix-ui/react-tooltip
+
+npm install @tanstack/react-query class-variance-authority clsx cmdk date-fns embla-carousel-react framer-motion input-otp lucide-react next-themes react-day-picker react-hook-form react-resizable-panels react-router-dom recharts sonner tailwind-merge tailwindcss-animate vaul zod
+
+# Install dev dependencies
+npm install -D @tailwindcss/typography @types/node autoprefixer postcss prettier tailwindcss vitest
+
+Step 4: Setup TailwindCSS
+# Initialize Tailwind configuration
+npx tailwindcss init -p
+
+# This creates tailwind.config.js and postcss.config.js
+
+
+Step 5: Copy the Generated Code Files
+# Create components directory structure
+mkdir -p src/components/ui
+mkdir -p src/pages
+mkdir -p src/lib
+mkdir -p src/hooks
+
+# Copy all the generated files:
+# - src/App.tsx
+# - src/index.css  
+# - src/components/Navigation.tsx
+# - src/components/ui/* (all UI components)
+# - src/pages/* (all page components)
+# - src/lib/utils.ts
+# - tailwind.config.ts
+# - package.json (update with dependencies)
+
+Step 6: Configure TypeScript
+# Update tsconfig.json to include path aliases
+
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}
+
+Step 7: Update Vite Configuration
+Create/update vite.config.ts:
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react-swc'
+import path from 'path'
+
+export default defineConfig({
+  plugins: [react()],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
+})
+
+# Start development server
+npm run dev
+
+# Your app will be available at: http://localhost:5173
+
+
+Build for Production
+# Create production build
+npm run build
+
+# Preview production build locally
+npm run preview
+
+
+Code Quality
+# Run TypeScript type checking
+npm run typecheck
+
+# Format code with Prettier
+npm run format.fix
+
+# Run tests
+npm test
+
+Final Project Structure:
+sap-cicd-platform/
+├── src/
+│   ├── components/
+│   │   ├── ui/          # Radix UI components
+│   │   └── Navigation.tsx
+│   ├── pages/
+│   │   ├── Index.tsx
+│   │   ├── CICDPipeline.tsx
+│   │   ├── Dashboard.tsx
+│   │   ├── Environments.tsx
+│   │   ├── ContactUs.tsx
+│   │   └── NotFound.tsx
+│   ├── lib/
+│   │   └── utils.ts
+│   ├── hooks/
+│   ├── App.tsx
+│   ├── main.tsx
+│   └── index.css
+├── public/
+├── package.json
+├── tailwind.config.ts
+├── vite.config.ts
+├── tsconfig.json
+└── README.md
+
+
+
+ Troubleshooting Tips:
+Port Already in Use:
+
+# Use different port
+npm run dev -- --port 3001
+TypeScript Errors:
+
+# Check for type errors
+npm run typecheck
+Dependency Issues:
+
+# Clear node_modules and reinstall
+rm -rf node_modules package-lock.json
+npm install
+Path Alias Issues:
+
+Ensure vite.config.ts has the correct path alias setup
+Restart VS Code after configuration changes
+
+ Access Your Application:
+Once running successfully:
+
+Development: http://localhost:5173
+Features Available:
+🏠 Landing page with modern design
+⚙️ CI/CD Pipeline with 8-stage wizard
+📊 Dashboard (placeholder)
+🌍 Environments (placeholder)
+📞 Contact Us (placeholder)
+The application is now ready for development and customization! 🎉
